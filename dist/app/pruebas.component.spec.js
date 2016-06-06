@@ -7,7 +7,6 @@ testing_1.describe('App: Pruebas', function () {
         testing_1.expect(app).toBeTruthy();
     }));
     testing_1.it('should have as title \'pruebas works!\'', testing_1.inject([pruebas_component_1.PruebasAppComponent], function (app) {
-        testing_1.expect(app.title).toEqual('pruebas works!');
     }));
 });
 //# sourceMappingURL=pruebas.component.spec.js.map

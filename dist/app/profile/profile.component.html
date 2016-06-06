@@ -1,0 +1,4 @@
+<input type="text" #newAlias placeholder="Alias" [(ngModel)]="user_data.alias" />
+<input type="text" #newAvatar placeholder="Avatar" [(ngModel)]="user_data.avatar" />
+<br/>
+<button (click)="save(newAlias.value, newAvatar.value)">Save</button>

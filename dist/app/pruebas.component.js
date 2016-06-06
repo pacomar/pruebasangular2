@@ -13,16 +13,23 @@ var angularfire2_1 = require('angularfire2');
 var router_deprecated_1 = require('@angular/router-deprecated');
 var items_component_1 = require('./items/items.component');
 var item_create_component_1 = require('./item/item-create.component');
+var profile_component_1 = require('./profile/profile.component');
+var characters_component_1 = require('./characters/characters.component');
+var character_component_1 = require('./character/character.component');
 var PruebasAppComponent = (function () {
     function PruebasAppComponent(af) {
+        var _this = this;
         this.af = af;
-        this.af.auth.subscribe(function (auth) { return console.log(auth); });
+        this.af.auth.subscribe(function (auth) { return _this.logued = auth != undefined; });
     }
     PruebasAppComponent.prototype.login = function () {
         this.af.auth.login({
-            provider: angularfire2_1.AuthProviders.Twitter,
+            provider: angularfire2_1.AuthProviders.Google,
             method: angularfire2_1.AuthMethods.Popup,
         });
+    };
+    PruebasAppComponent.prototype.logout = function () {
+        this.af.auth.logout();
     };
     PruebasAppComponent.prototype.overrideLogin = function () {
         this.af.auth.login({
@@ -44,12 +51,28 @@ var PruebasAppComponent = (function () {
             {
                 path: '/items',
                 name: 'Items',
-                component: items_component_1.ItemsComponent
+                component: items_component_1.ItemsComponent,
+                useAsDefault: true
             },
             {
                 path: '/item-create',
                 name: 'ItemCreate',
                 component: item_create_component_1.ItemCreateComponent
+            },
+            {
+                path: '/profile',
+                name: 'Profile',
+                component: profile_component_1.ProfileComponent
+            },
+            {
+                path: '/characters',
+                name: 'Characters',
+                component: characters_component_1.CharactersComponent
+            },
+            {
+                path: '/character/:id',
+                name: 'Character',
+                component: character_component_1.CharacterComponent
             }
         ]), 
         __metadata('design:paramtypes', [angularfire2_1.AngularFire])

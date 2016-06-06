@@ -4,6 +4,9 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/route
 
 import { ItemsComponent } from './items/items.component';
 import { ItemCreateComponent } from './item/item-create.component';
+import { ProfileComponent } from './profile/profile.component';
+import { CharactersComponent } from './characters/characters.component';
+import { CharacterComponent } from './character/character.component';
 
 @Component({
 	selector: 'pruebas-app',
@@ -18,23 +21,49 @@ import { ItemCreateComponent } from './item/item-create.component';
 	{
 		path: '/items',
 		name: 'Items',
-		component: ItemsComponent
+		component: ItemsComponent,
+		useAsDefault: true
 	},
 	{
 		path: '/item-create',
 		name: 'ItemCreate',
 		component: ItemCreateComponent
+	},
+	{
+		path: '/profile',
+		name: 'Profile',
+		component: ProfileComponent
+	},
+	{
+		path: '/characters',
+		name: 'Characters',
+		component: CharactersComponent
+	},
+	{
+		path: '/character/:id',
+		name: 'Character',
+		component: CharacterComponent
+	}
+		,
+	{
+		path: '/character-create',
+		name: 'CharacterCreate',
+		component: CharacterCreateComponent
 	}
 ])
 export class PruebasAppComponent {
+	logued: boolean;
 	constructor(public af: AngularFire) {
-		this.af.auth.subscribe(auth => console.log(auth));
+		this.af.auth.subscribe(auth => this.logued = auth != undefined);
 	}
 	login() {
 		this.af.auth.login({
-			provider: AuthProviders.Twitter,
+			provider: AuthProviders.Google,
 			method: AuthMethods.Popup,
 		});
+	}
+	logout() {
+		this.af.auth.logout();
 	}
 	overrideLogin() {
 		this.af.auth.login({
